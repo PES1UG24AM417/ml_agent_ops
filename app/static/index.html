@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motor Claim Triage</title>
+  <style>
+    body { font: 16px system-ui, sans-serif; max-width: 760px; margin: 2rem auto; padding: 0 1rem; color: #172033; }
+    label { display: block; margin: 1rem 0 .25rem; font-weight: 600; }
+    input, select, textarea, button { box-sizing: border-box; width: 100%; padding: .65rem; font: inherit; }
+    textarea { min-height: 8rem; }
+    button { margin-top: 1rem; cursor: pointer; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #f2f4f8; padding: 1rem; }
+    .note { color: #8a3d00; }
+  </style>
+</head>
+<body>
+  <h1>Motor claim intake and triage</h1>
+  <p class="note">Advisory only. A human claims handler makes all coverage decisions. The included corpus is illustrative demo data.</p>
+  <form id="claim-form">
+    <label for="policy">Policy number</label>
+    <input id="policy" value="DEMO-1001" required minlength="4" maxlength="32">
+    <label for="date">Date of loss</label>
+    <input id="date" type="date" required>
+    <label for="registration">Vehicle registration</label>
+    <input id="registration" value="KA01AB1234" required>
+    <label for="amount">Claimed amount (INR)</label>
+    <input id="amount" type="number" min="1" max="10000000" value="25000" required>
+    <label for="use">Vehicle use</label>
+    <select id="use">
+      <option value="private">Private</option>
+      <option value="commercial">Commercial</option>
+      <option value="food_delivery">Food delivery</option>
+      <option value="taxi">Taxi</option>
+      <option value="unknown">Unknown</option>
+    </select>
+    <label for="description">What happened?</label>
+    <textarea id="description" minlength="20" maxlength="3000" required>My car was damaged in a collision while I was driving for personal use.</textarea>
+    <button type="submit">Submit claim</button>
+  </form>
+  <h2>Run result</h2>
+  <pre id="result" aria-live="polite">Submit a claim to see its triage status and supporting passages.</pre>
+  <script>
+    const form = document.querySelector("#claim-form");
+    const output = document.querySelector("#result");
+    document.querySelector("#date").value = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      output.textContent = "Submitting claim...";
+      try {
+        const submission = await fetch("/v1/claims", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({
+            policy_number: document.querySelector("#policy").value,
+            loss_date: document.querySelector("#date").value,
+            vehicle_registration: document.querySelector("#registration").value,
+            claimed_amount: Number(document.querySelector("#amount").value),
+            vehicle_use: document.querySelector("#use").value,
+            description: document.querySelector("#description").value
+          })
+        });
+        const accepted = await submission.json();
+        if (!submission.ok) throw new Error(JSON.stringify(accepted.detail || accepted));
+        output.textContent = `Run ${accepted.run_id} is queued...`;
+        for (let attempt = 0; attempt < 120; attempt += 1) {
+          await new Promise(resolve => setTimeout(resolve, 500));
+          const response = await fetch(accepted.status_url);
+          const run = await response.json();
+          output.textContent = JSON.stringify(run, null, 2);
+          if (["completed", "escalated", "failed"].includes(run.status)) break;
+        }
+      } catch (error) {
+        output.textContent = `Request failed: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>

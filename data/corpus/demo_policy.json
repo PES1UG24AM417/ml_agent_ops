@@ -1,0 +1,48 @@
+{
+  "notice": "Illustrative coursework fixture only; not an insurer policy or legal advice.",
+  "product": "Demo private car package policy",
+  "clauses": [
+    {
+      "clause_id": "DEMO-COVER-OD-01",
+      "source": "Demo private car policy wording, Section I (illustrative)",
+      "category": "coverage",
+      "topics": "own damage collision accident",
+      "text": "Illustrative clause: The insurer may indemnify accidental loss of or damage to the insured vehicle, subject to the terms, conditions, limitations and exclusions of this policy."
+    },
+    {
+      "clause_id": "DEMO-USE-01",
+      "source": "Demo private car policy wording, Limitations as to Use (illustrative)",
+      "category": "restriction",
+      "topics": "permitted use private commercial food delivery",
+      "text": "Illustrative clause: The vehicle may be used for social, domestic and pleasure purposes and for the insured's business. It must not be used for hire or reward, racing, speed testing, or a purpose not permitted by the policy schedule."
+    },
+    {
+      "clause_id": "DEMO-EXCL-01",
+      "source": "Demo private car policy wording, Exclusions (illustrative)",
+      "category": "exclusion",
+      "topics": "exclusions unauthorized use",
+      "text": "Illustrative clause: Loss or damage occurring while the vehicle is used outside the limitations as to use stated in the policy may be excluded, subject to the complete wording and applicable law."
+    },
+    {
+      "clause_id": "DEMO-COVER-TP-01",
+      "source": "Demo private car policy wording, Third-party section (illustrative)",
+      "category": "coverage",
+      "topics": "third party liability injury property",
+      "text": "Illustrative clause: The policy may cover the insured's legal liability for accidental death, bodily injury, or property damage to a third party, subject to policy terms and statutory requirements."
+    },
+    {
+      "clause_id": "DEMO-COVER-TH-01",
+      "source": "Demo private car policy wording, Theft section (illustrative)",
+      "category": "coverage",
+      "topics": "theft stolen vehicle",
+      "text": "Illustrative clause: Theft of the insured vehicle may be considered under the own-damage section, subject to prompt notice, police documentation, policy conditions and exclusions."
+    },
+    {
+      "clause_id": "DEMO-PROC-01",
+      "source": "Demo claims procedure (illustrative)",
+      "category": "procedure",
+      "topics": "claim notification documents survey",
+      "text": "Illustrative procedure: Notify the insurer promptly, provide the policy number, date and circumstances of loss, registration details, and requested supporting documents. A survey may be arranged where required."
+    }
+  ]
+}

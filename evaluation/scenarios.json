@@ -1,0 +1,24 @@
+{
+  "scenarios": [
+    {"id":"E01","description":"Personal-use collision caused front damage.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-OD-01"},
+    {"id":"E02","description":"The insured car was damaged in an accident during a private trip.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-OD-01"},
+    {"id":"E03","description":"I was making a food delivery run in my own car when the accident happened.","vehicle_use":"private","expected":"escalate","supporting_passage":"DEMO-USE-01"},
+    {"id":"E04","description":"Collision damage happened while the vehicle was being used as a taxi.","vehicle_use":"private","expected":"escalate","supporting_passage":"DEMO-USE-01"},
+    {"id":"E05","description":"A crash damaged the car during commercial goods delivery.","vehicle_use":"commercial","expected":"escalate","supporting_passage":"DEMO-USE-01"},
+    {"id":"E06","description":"My vehicle was stolen overnight from the parking area.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-TH-01"},
+    {"id":"E07","description":"A thief took my insured car from outside my home.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-TH-01"},
+    {"id":"E08","description":"The stolen car has not been recovered and I notified the police.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-TH-01"},
+    {"id":"E09","description":"My car hit another vehicle and damaged its bodywork.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-TP-01"},
+    {"id":"E10","description":"A pedestrian was injured when the insured vehicle collided with them.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-TP-01"},
+    {"id":"E11","description":"The vehicle was written off after a severe road accident.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-OD-01"},
+    {"id":"E12","description":"The car is beyond repair after the collision.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-OD-01"},
+    {"id":"E13","description":"A delivery accident occurred while I was carrying paid goods.","vehicle_use":"food_delivery","expected":"escalate","supporting_passage":"DEMO-EXCL-01"},
+    {"id":"E14","description":"My vehicle was damaged during racing on a public road.","vehicle_use":"private","expected":"escalate","supporting_passage":"DEMO-USE-01"},
+    {"id":"E15","description":"An accident happened while using the car for passenger hire.","vehicle_use":"taxi","expected":"escalate","supporting_passage":"DEMO-USE-01"},
+    {"id":"E16","description":"There was a dent on my parked car after a private journey.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-OD-01"},
+    {"id":"E17","description":"The vehicle was damaged by an unknown event not described in the policy corpus.","vehicle_use":"unknown","expected":"escalate","supporting_passage":"DEMO-COVER-OD-01"},
+    {"id":"E18","description":"Please investigate this unusual loss; the circumstances are unclear.","vehicle_use":"unknown","expected":"escalate","supporting_passage":"DEMO-PROC-01"},
+    {"id":"E19","description":"The other driver suffered bodily injury during the collision.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-COVER-TP-01"},
+    {"id":"E20","description":"I need to report a collision and ask which documents the handler needs.","vehicle_use":"private","expected":"recommend","supporting_passage":"DEMO-PROC-01"}
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "title": "Motor Claim Triage",
+  "uid": "fnol-triage",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Run p50 / p95 latency (seconds)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [
+        {"expr": "histogram_quantile(0.50, sum(rate(fnol_run_seconds_bucket[5m])) by (le))", "legendFormat": "p50"},
+        {"expr": "histogram_quantile(0.95, sum(rate(fnol_run_seconds_bucket[5m])) by (le))", "legendFormat": "p95"}
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Runs by terminal status",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [{"expr": "sum by (status) (rate(fnol_runs_total[5m]))", "legendFormat": "{{status}}"}]
+    },
+    {
+      "id": 3,
+      "title": "Queue depth",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "targets": [{"expr": "fnol_queue_depth", "legendFormat": "queued"}]
+    },
+    {
+      "id": 4,
+      "title": "Agent steps",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "targets": [{"expr": "sum by (agent, result) (rate(fnol_agent_steps_total[5m]))", "legendFormat": "{{agent}} {{result}}"}]
+    },
+    {
+      "id": 5,
+      "title": "Run errors per second",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16},
+      "targets": [{"expr": "sum(rate(fnol_runs_total{status=\"failed\"}[5m]))", "legendFormat": "failed runs/sec"}]
+    },
+    {
+      "id": 6,
+      "title": "Agent retries per second",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 16},
+      "targets": [{"expr": "sum by (agent) (rate(fnol_agent_retries_total[5m]))", "legendFormat": "{{agent}}"}]
+    }
+  ]
+}
